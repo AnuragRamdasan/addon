@@ -1,4 +1,4 @@
-var FIELDNAMES = ['Emails'];
+const FIELDNAMES = ['Emails'];
 
 /**
  * Creates the main card users see with form inputs to log expense.
@@ -9,32 +9,33 @@ var FIELDNAMES = ['Emails'];
  * @returns {Card}
  */
 function createJiraCard(opt_prefills, opt_status) {
-  var card = CardService.newCardBuilder();
+  const card = CardService.newCardBuilder();
   card.setHeader(CardService.newCardHeader().setTitle('Lookup'));
 
-
-  var formSection = createFormSection(CardService.newCardSection(),
-                                      FIELDNAMES, opt_prefills);
+  const formSection = createFormSection(CardService.newCardSection(), FIELDNAMES, opt_prefills);
 
   card.addSection(formSection);
 
-
   Logger.log(opt_prefills);
 
-  var issues = [];
-  issues = jiraConnection(opt_prefills[0])
+  let issues = [];
+  issues = jiraConnection(opt_prefills[0]);
 
   Logger.log(issues);
 
   if (issues.length > 0) {
-    for (var i = 0; i < issues.length; i++) {
-      var results_section = CardService.newCardSection()
-        .addWidget(CardService.newKeyValue()
+    for (let i = 0; i < issues.length; i++) {
+      const results_section = CardService.newCardSection().addWidget(
+        CardService.newKeyValue()
           .setTopLabel(issues[i][0])
-          .setContent(issues[i][1]).setOpenLink(CardService.newOpenLink()
-            .setUrl("https://3one4capital.atlassian.net/browse/"+issues[i][0])
-            .setOpenAs(CardService.OpenAs.FULL_SIZE)
-            .setOnClose(CardService.OnClose.NOTHING)))
+          .setContent(issues[i][1])
+          .setOpenLink(
+            CardService.newOpenLink()
+              .setUrl(`https://3one4capital.atlassian.net/browse/${issues[i][0]}`)
+              .setOpenAs(CardService.OpenAs.FULL_SIZE)
+              .setOnClose(CardService.OnClose.NOTHING)
+          )
+      );
       card.addSection(results_section);
     }
   }
@@ -51,8 +52,8 @@ function createJiraCard(opt_prefills, opt_status) {
  * @returns {CardSection}
  */
 function createFormSection(section, inputNames, opt_prefills) {
-  for (var i = 0; i < inputNames.length; i++) {
-    var widget = CardService.newTextInput()
+  for (let i = 0; i < inputNames.length; i++) {
+    const widget = CardService.newTextInput()
       .setFieldName(inputNames[i])
       .setTitle(inputNames[i]);
     if (opt_prefills && opt_prefills[i]) {

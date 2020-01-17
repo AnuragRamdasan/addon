@@ -1,7 +1,7 @@
 function getContextualAddOn(event) {
-  var message = getCurrentMessage(event);
-  var prefills = [getEmails(message)];
-  var card = createJiraCard(prefills);
+  const message = getCurrentMessage(event);
+  const prefills = [getEmails(message)];
+  const card = createJiraCard(prefills);
 
   return [card.build()];
 }
@@ -12,8 +12,8 @@ function getContextualAddOn(event) {
  * @return {Message}
  */
 function getCurrentMessage(event) {
-  var accessToken = event.messageMetadata.accessToken;
-  var messageId = event.messageMetadata.messageId;
+  const { accessToken } = event.messageMetadata;
+  const { messageId } = event.messageMetadata;
   GmailApp.setCurrentMessageAccessToken(accessToken);
   return GmailApp.getMessageById(messageId);
 }
