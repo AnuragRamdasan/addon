@@ -38,6 +38,11 @@ npx clasp login
 npx clasp create --type sheets --title "My Apps Script Project" --rootDir ./dist
 ```
 
+To clone the existing project run
+```
+npx clasp clone 1EYY2TnEyXcbv5CNfEKg4lrj1yjWkIpiFPwx-obG6m493mUA5Nv2E7VtD --rootDir ./dist
+```
+
 **4.** Include the necessary [OAuth Scopes](./scopes.md) in the [appsscript.json](./appsscript.json) file
 
 1. Deploy the project (development)
